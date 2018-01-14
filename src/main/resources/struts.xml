@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  
+  
+<struts>  
+    <constant name="struts.devMode" value="true" />  
+    <constant name="struts.action.extension" value="action"></constant>
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <package name="main" namespace="/" extends="struts-default">  
+        <action name="test" class="testAction">
+        	<result name="success">/test.jsp</result>
+        </action>
+        <!-- 岗位管理 -->
+		<action name="role_*" class="roleAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/roleAction/saveUI.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/roleAction/saveUI.jsp</result>
+			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp</result>
+			<result name="toList" type="redirectAction">role_list</result>
+		</action>
+
+		<!-- 部门管理 -->
+		<action name="department_*" class="departmentAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/department/list.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/department/saveUI.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/department/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">department_list?parentId=${parentId}</result>
+		</action>
+		
+		<!-- 用户管理 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/user/list.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/user/saveUI.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/user/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">user_list</result>
+			<result name="loginUI">/WEB-INF/jsp/user/login.jsp</result>
+			<result name="logout">/WEB-INF/jsp/user/logout.jsp</result>
+			<result name="toIndex" type="redirect">/index.jsp</result>
+		</action>
+		
+		<!-- 首页 -->
+		<action name="home_*" class="homeAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/home/{1}.jsp</result>
+		</action>
+    </package>  
+      
+</struts> 
